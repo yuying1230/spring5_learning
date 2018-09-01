@@ -17,7 +17,7 @@ IoC（Inversion of Control，控制反转），是指将原来在程序里面手
 > 什么是DI？
 
 DI（Dependency Injection，依赖注入），指在Spring创建对象的过程中，将其所依赖的属性（常量、对象或集合等）配置到该对象中。
-> IoC与DI的区别与联系
+> IoC与DI的区别与联系
 
 IoC是指将创建对象的控制权转交给Spring容器，DI不仅强调了对象由Spring容器来创建，并且强调了对象之间的依赖关系。
 DI更明确的说明了“被注入的对象（例如UserService）依赖IoC容器对其依赖的对象（UserDao）进行配置”。
