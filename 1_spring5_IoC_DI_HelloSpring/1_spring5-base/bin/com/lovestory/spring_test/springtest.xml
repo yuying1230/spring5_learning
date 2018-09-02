@@ -3,10 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- 配置项告诉Spring的IoC容器需要管理哪些类的对象 -->
-	<bean id="helloSpring" class="com.lovestory.HelloSpring">
-		<property name="username" value="Fish" />
+	<bean id="springtestbean" class="com.lovestory.spring_test.SpringTestBean">
 	</bean>
-		
-	<import resource="classpath:com/lovestory/spring_test/springtest.xml"/>
+
 </beans>

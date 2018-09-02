@@ -8,4 +8,5 @@
 		<property name="username" value="Fish" />
 	</bean>
 		
+	<import resource="classpath:com/lovestory/spring_test/springtest.xml"/>
 </beans>

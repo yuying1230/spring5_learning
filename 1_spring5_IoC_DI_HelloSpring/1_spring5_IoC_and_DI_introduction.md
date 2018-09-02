@@ -45,7 +45,7 @@ HelloSpring类如图：
 ![testerror](./images/testerror.jpg)
 6. 前述问题解决后，测试通过
 ![testsuccess](./images/testsuccess.jpg)
-## 程序分析
+## 三 程序分析
 ### 1. 什么是BeanFactory
 BeanFactory表示Spring IoC容器，是生产bean对象的工厂，负责配置、创建和管理bean的生命周期，是Spring最古老的接口。  
 Spring IoC容器所管理的对象就称为bean。
@@ -62,7 +62,70 @@ Spring IoC通过读取配置文件中所配置的元数据，通过元数据对�
 4. 调用getBean()方法的时候，从容器中返回对象实例
 
 其实，就是把代码从java文件转移到了xml文件中。
+## 四 getbean()方法的三种签名
+getBean()方法是用来从Spring IoC容器中获取bean的对象
+### 1. Object getBean(String beanName)
+签名一：根据bean对象在容器中的名称来获取
+factory.getBean("helloSpring");
+一般不会出现相同的bean name，xml中的id值需唯一，否则会报BeanDefinitionParsingException错误
+### 2. T getBean(Class<T> requireType)
+签名二：根据指定的类型去寻找bean的对象
+factory.getBean(HelloSpring.class);
+一般xml中不会对不同的bean配置同一个类型，否则会报NoUniqueBeanDefinitionException错误
+### 3. T getBean(String beanName, @Nullable Class<T> requireType)
+签名三：根据bean对象的类型和id名称去寻找，**强烈推荐使用该方式**
+factory.getBean("helloSpring", HelloSpring.class);
+## 五 Spring基本配置
+### 1. bean元素
+> id和name属性
 
+Spring的配置中，id和name都可以定义bean元素的名称。  
+id属性遵守xml语法ID的约束，必须以字母开始，可以使用字母、数字、下划线、冒号等，不能以"/"开头。  
+name属性可以使用很多特殊字符，也可以为bean元素起多个别名，多个别名之间使用逗号或者空格隔开，使用其中一个通过调用getBean()方法就可以。  
+`<bean name="love,lovely" class="...">` 或者 `<bean name="love lovely" class="...">`
 
+**注意1：从Spring3.1开始，id属性不再是ID类型了，而是String类型，也可以使用“/”开头了。**  
+**注意2：bean应该尽量规范其名，不要使用非主流名称，尽量使用id。**
+### 2. \<import resource="/"\>元素
+开发中，应用规模增加会导致xml中的bean元素配置数量增大，通过将xml分解，可以提高可维护性。  
+在applicationContext.xml文件的beans元素内，可以通过import元素导入其他的配置文件（默认从bin目录开始）。  
+语法：`<import resource="src/com/lovestory/hellospring.xml">`  
+说明：  
+1. 默认情况是从classpath的根路径查找
+2. 可以使用前缀来定义文件的基础位置（**推荐这种写法**）
+`<import resource="classpath:src/com/lovestory/hellospring.xml">`   
 
+**注意：只有当框架中实现了Resource接口才能识别前缀标识符classpath。**
+
+## 六 测试框架
+### 1. 传统测试与Spring测试框架
+传统测试，如JUnit4、JUnit5等单元测试，一方面，每次运行测试案例都会创建和销毁一个新的Spring IoC容器，性能不好。另一方面，销毁Spring IoC容器属于非正常方式强制关闭，使得扫尾工作执行不到。如图所示：
+![tratest](./images/tratest.jpg)
+Spring测试框架是由Spring IoC容器管理测试代码。如图所示：
+![springtest](./images/springtest.jpg)
+### 2. Spring测试框架
+> 测试依赖
+
+导入如下jar包，并添加到build path中  
+spring-test-版本.jar  
+spring-context-版本.jar  
+spring-aop-版本.jar  
+spring-expression-版本.jar  
+> 基于JUnit4
+
+![springjunit4test](./images/springjunit4test.jpg)
+> 基于JUnit5
+
+![springjunit5test](./images/springjunit5test.jpg)
+## 附录
+### 1. Spring配置文件说明
+1. 必须要有schema声明，约束和规范我们的配置如何去写，约束指向的网络路径。
+2. 开发xml时，如果联网会自动缓存路径文件到本地，提供提示功能。
+3. 如果没联网，需要配置xsd schema文件位置：
+先拷贝图片中红色框内的内容
+![xmlbeanxsd](./images/xmlbeanxsd.jpg)
+然后按下图进行操作即可完成：
+![catalogconfig](./images/catalogconfig.jpg)
+其中，文件系统路径是spring包的schema目录中，具体路径如下图：
+![xsdlocation](./images/xsdlocation.jpg)
 
