@@ -45,3 +45,24 @@ HelloSpring类如图：
 ![testerror](./images/testerror.jpg)
 6. 前述问题解决后，测试通过
 ![testsuccess](./images/testsuccess.jpg)
+## 程序分析
+### 1. 什么是BeanFactory
+BeanFactory表示Spring IoC容器，是生产bean对象的工厂，负责配置、创建和管理bean的生命周期，是Spring最古老的接口。  
+Spring IoC容器所管理的对象就称为bean。
+### 2. Spring IoC容器如何知道哪些是它所管理的对象
+Spring IoC通过读取配置文件中所配置的元数据，通过元数据对应用中的各个对象进行实例化及装配。
+> 三种元数据的配置方式
+1. XML-based configuration
+2. Annotation-based configuration
+3. Java-based configuration
+### 3. Spring IoC管理bean的原理
+1. 通过Resource对象加载配置文件
+2. 解析配置文件，得到指定名称的bean
+3. 解析bean元素，id作为bean的名字，class用于反射得到bean的实例。其中，**bean类必须存在一个无参构造器（和访问权限无关）**
+4. 调用getBean()方法的时候，从容器中返回对象实例
+
+其实，就是把代码从java文件转移到了xml文件中。
+
+
+
+
