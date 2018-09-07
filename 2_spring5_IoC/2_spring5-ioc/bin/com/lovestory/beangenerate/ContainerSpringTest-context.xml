@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="cat_constructor" class="com.lovestory.beangenerate._01_constructor.Cat_constructor"></bean>
+	
+	<bean id="cat_staticFactory" class="com.lovestory.beangenerate._02_staticFactory.CatStaticFactory" factory-method="createInstance"></bean>
+	
+	<bean id="cat_instanceFactory" class="com.lovestory.beangenerate._03_instance.Cat_instancefactory"></bean>
+	<bean id="cat_instance" factory-bean="cat_instanceFactory" factory-method="createInstance"></bean>
+	
+	<bean id="cat_factorybean" class="com.lovestory.beangenerate._04_factorybean.Cat_factorybeanFactory">
+		<property name="username" value="lovestory"></property>
+	</bean>
+</beans>
