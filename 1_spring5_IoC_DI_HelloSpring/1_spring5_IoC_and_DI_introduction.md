@@ -24,7 +24,7 @@ DI更明确的说明了“被注入的对象（例如UserService）依赖IoC容�
 ## 二 程序演练
 ### 1. 依赖jar包
 jar包下载：在[spring官网](http://repo.springsource.org/libs-release-local/org/springframework/spring/5.0.2.RELEASE/)中选择相应版本下载。  
-### 2. 创建工程（IDE：STS）
+### 2. 创建工程（IDE：STS）
 1. 新建java project，创建lib目录并导入Spring5的核心jar包，将jar包添加到build path。如图所示：
 ![newproject](./images/newproject.jpg)
 2. 新建source folder类型的resources目录用来存放配置文件，创建applicationContext.xml文件并配置schema约束（STS可以直接创建spring使用的文件形式）。如图所示：
