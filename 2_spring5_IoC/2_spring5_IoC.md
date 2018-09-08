@@ -67,7 +67,7 @@ Bean的作用域：是指Spring容器中创建的Bean对象相对于其他Bean�
 
 Bean的初始化操作配置如下：  
 `<bean init-method="" destroy-method="" />`。  
-init-method： Bean生命周期的初始化方法，在构造器执行（创建对象）之后，立即执行。  
+init-method： Bean生命周期的初始化方法，在构造器执行（创建对象）之后，立即执行。  
 destroy-method： 定义销毁之前的方法，在容器执行销毁之前调用。scope为多例时不会执行扫尾销毁工作。
 
 ## 五 Bean的生命周期
