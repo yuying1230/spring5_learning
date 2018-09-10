@@ -1,10 +1,10 @@
 ## 一 DI概述
 ### 1. DI（Dependency Injection，依赖注入）
 DI：是指Spring创建对象的过程中，将对象依赖属性（常量、对象、集合等）通过配置设值给该对象。  
-一般来说，IoC是指将对象的创建权交给Spring容器
+一般来说，IoC是指将对象的创建权交给Spring容器。
 
 ### 2. 注入（Injection）
-注入：简单来说就是给对象设置值
+注入：简单来说就是给对象设置值。
 
 > 注入方式
 
@@ -19,8 +19,8 @@ DI：是指Spring创建对象的过程中，将对象依赖属性（常量、对
 ## 二 装配方式
 ### 1. XML配置
 #### 1.1 XML自动装配
-通过XML配置自动装配的方式不推荐，只做了解。
-**例子：com.lovestory.autowired包中**
+通过XML配置自动装配的方式不推荐，只做了解。  
+**例子：com.lovestory.autowired包中。**  
 xml装配是在bean元素中设置autowire属性：`<bean id="" class="" autowire=""/>`。  
 autowire属性：让Spring容器按照一定的规则方式自己去找合适的对象，并完成DI操作，autowire包括以下值：
 1. default：不要自动注入，缺省值。
@@ -31,7 +31,8 @@ autowire属性：让Spring容器按照一定的规则方式自己去找合适的
 **注意1：byName自动注入方式要求所有的属性名字和id的名字必须保证一种规范的命名方式。**  
 **注意2：byType自动注入方式，如果Spring中同一个类型有多个实例，会报bean不是唯一类型错误，该方式不推荐，作了解。**
 #### 1.2 setter注入/属性注入
-setter注入是通过对象的setter方法来完成对象的设置操作
+setter注入是通过对象的setter方法来完成对象的设置操作。  
+此注入方式用的比较多。
 > 使用bean元素的<property>子元素设置
 
 **例子：com.lovestory.di_setter包中**
@@ -43,3 +44,22 @@ Spring
 **注1：Spring是通过属性的setter方法注入值  
 注2：配置文件中配置的值都是String类型，Spring可以自动完成类型转换  
 注3：属性值的设置是在init-method()方法执行之前完成的**
+> p命名空间
+
+xml约束中，增加`xmlns:p="http://www.springframework.org/schema/p"`，属性注入可以写成：`<bean id="employee" class="com.lovestory.di_setter.Employee" p:name="lovestory"
+	p:age="18" p:salary="1000"></bean>`。
+
+#### 1.3 构造器注入
+例子：com.lovestory.di_constructor包中。  
+`<!-- 对象类型的 内部bean -->
+	<bean id="person" class="com.lovestory.di_constructor.Person">
+		<constructor-arg name="c">
+			<bean class="com.lovestory.di_constructor.Cat"></bean>
+		</constructor-arg>
+	</bean>`  
+  内部bean可以不用id，因为他只服务于外部bean。
+
+### 2. bean元素的继承
+例子：在com.lovestory.bean_tag_inheritance包中。  
+bean元素的继承：是把多个bean元素的共同的属性配置，抽取到另一个公用的bean元素中。  
+当多个bean元素有共同配置的时候，可以将共同的配置抽取出来，实则是bean配置的拷贝，此方法用的比较多。  
